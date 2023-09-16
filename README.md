@@ -10,3 +10,9 @@ To use the python code to generate the javascript you will need to install the r
 Other wise you can just use map4.html and this will work. 
 
 Make sure all the files are in the same folder on your server for the api to work.
+
+#ToDO  read in community directory and plot map points geo locations from addresses so the directory
+updates the map as data is entered in the drupal system.
+make the map points link to the drupal lead posts.
+make them display the business name in a popup info bubble.
+
