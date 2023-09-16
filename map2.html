@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>USA Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+
+  <div id="map" style="height: 600px;"></div>
+
+  <script>
+    // Class definition for generating USA map
+    class USAMap {
+      constructor() {
+        this.map = L.map('map').setView([37.0902, -95.7129], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(this.map);
+      }
+
+      addMarker(location) {
+        const marker = L.marker([location.Latitude, location.Longitude]).addTo(this.map);
+        const popupContent = `<b>${location.State}</b><br><a href="${location.Website}" target="_blank">${location.Website}</a>`;
+        
+        marker.on('mouseover', function() {
+          this.bindPopup(popupContent).openPopup();
+        });
+
+        marker.on('mouseout', function() {
+          this.closePopup();
+        });
+
+        marker.on('click', function() {
+          window.location.href = location.Website;
+        });
+      }
+    }
+
+    // Initialize the class
+    const usaMap = new USAMap();
+
+    // Fetch the JSON data and add markers
+    fetch('us_states_and_territories.json')
+      .then(response => response.json())
+      .then(data => {
+        const locations = data.locations;
+        locations.forEach(location => {
+          usaMap.addMarker(location);
+        });
+      })
+      .catch(error => console.error('Error fetching JSON data:', error));
+  </script>
+
+</body>
+</html>
