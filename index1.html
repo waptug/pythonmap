@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find a Licensed Professional at ProListMe.Com</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+
+   <style>
+  #map {
+    width: 50%;
+    height: 600px;
+    margin: auto; /* Center the map */
+    border: 2px solid #000; /* Add a border */
+  }
+
+  /* Making it responsive */
+  @media (max-width: 768px) {
+    #map {
+      width: 100%;
+    }
+  }
+  
+  
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  
+  
+}
+
+.info-toggle {
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.info-pill {
+  cursor: pointer;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background: #f1f1f1;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 12px; /* Rounded corners to make it pill-shaped */
+  z-index: 1000; /* To ensure it's above other elements */
+}
+
+.info-button {
+  cursor: pointer;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background: #f1f1f1;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  z-index: 1000;
+}
+
+.info-button {
+      cursor: pointer;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: #f1f1f1;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      z-index: 1000;
+    }
+    
+</style>
+
+</head>
+<body>
+
+  <div class="container text-center my-5">
+    <img src="logo.gif" alt="ProListMe.Com Logo">
+    <h2>ProListMe.Com</h2>
+  </div>
+
+  <div class="container my-5 text-center">
+    <h3 class="text-center">I'm Looking for a Licensed Professional</h3>
+    <form id="search-form">
+      <div class="form-group row">
+        <label for="profession" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-8">
+          <select class="form-control" id="profession">
+            <option value="">Select a profession</option>
+            <!-- Options will be populated here -->
+          </select>
+        </div>
+      </div>
+    </form>
+    <button type="button" class="btn btn-primary" id="register-btn">Add your business profile card to ProListMe</button>
+    <button type="button" class="btn btn-primary" id="businesscards-btn">Access Community Business Card Directory</button>
+  </div>
+
+  <!-- Div area for displaying errors or messages -->
+  <div class="container my-5 text-center">
+    <div id="message-area" class="alert alert-info d-none"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <script>
+    // Class to interact with the Drupal Taxonomy API
+    class DrupalTaxonomyFetcher {
+      constructor() {
+        this.baseURL = 'https://prolistme.com/web/web/jsonapi/taxonomy_term/profession';
+        this.initialized = false;
+        this.errorCode = null;
+      }
+
+      async init() {
+        try {
+          await this.validateAPIEndpoint(this.baseURL);
+          this.initialized = true;
+        } catch (error) {
+          this.initialized = false;
+          this.errorCode = error.code;
+          throw error;
+        }
+      }
+
+      async validateAPIEndpoint(url) {
+        try {
+          const response = await $.ajax({
+            url: url,
+            type: 'GET'
+          });
+          if (!response || !response.data) {
+            throw {
+              code: 'ERR_UNEXPECTED_STATUS',
+              message: 'Received an unexpected response'
+            };
+          }
+        } catch (error) {
+          throw {
+            code: 'ERR_INVALID_API',
+            message: 'Invalid or unreachable API endpoint.'
+          };
+        }
+      }
+
+      async fetchProfessions() {
+        const response = await $.get(this.baseURL);
+        return response.data.map(term => term.attributes.name);
+      }
+    }
+
+    // Class to manage DOM elements
+    class DOMManager {
+      populateProfessionDropdown(professions) {
+        const dropdown = $('#profession');
+        professions.forEach(professionName => {
+          dropdown.append(new Option(professionName, professionName));
+        });
+      }
+
+      displayMessage(message, type = "info") {
+        const messageArea = $('#message-area');
+        messageArea.removeClass('d-none alert-info alert-danger').addClass(`alert-${type}`);
+        messageArea.text(message);
+      }
+    }
+
+    $(document).ready(async function() {
+      const drupalFetcher = new DrupalTaxonomyFetcher();
+      const domManager = new DOMManager();
+
+      try {
+        await drupalFetcher.init();
+        if (drupalFetcher.initialized) {
+          const professions = await drupalFetcher.fetchProfessions();
+          domManager.populateProfessionDropdown(professions);
+        }
+      } catch (error) {
+        domManager.displayMessage('Initialization failed: Invalid or unreachable API endpoint.', 'danger');
+      }
+
+      // Event handler for profession change
+      $('#profession').change(function() {
+        const selectedProfession = $(this).val();
+        // Here you can call a function to perform the actual search
+        if (selectedProfession) {
+        performSearch(selectedProfession);
+      }
+      });
+
+      // Event handler for the "Add your card to ProListMe" button
+      $('#register-btn').click(function() {
+        // Redirect or perform an action to allow the user to register
+         window.location.href = 'https://prolistme.com/web/web/user/register';
+      });
+
+      // Event handler for the "List Community Business Card Directory" button
+      $('#businesscards-btn').click(function() {
+        // Redirect or perform an action to show the business card directory
+         window.location.href = 'https://prolistme.com/rolodexprogressbar.html';
+      });
+    });
+    
+    // Create a class to manage search form behavior
+class SearchFormManager {
+  constructor(formId, professionId) {
+    this.form = document.getElementById(formId);
+    this.profession = document.getElementById(professionId);
+
+    // Attach event listeners
+    this.profession.addEventListener('change', this.handleSubmit.bind(this));
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const selectedProfession = this.profession.value;
+
+    if (selectedProfession !== '') {
+      this.redirectToSearch(selectedProfession);
+    } else {
+      alert('Please select a profession.');
+    }
+  }
+
+  redirectToSearch(profession) {
+    window.location.href = 'https://prolistme.com/web/web/search/node?keys=' + profession;
+  }
+}
+
+// Run code on document ready
+document.addEventListener('DOMContentLoaded', function() {
+  const searchManager = new SearchFormManager('search-form', 'profession');
+
+  // Handle other button clicks here
+  document.getElementById('register-btn').addEventListener('click', function() {
+    window.location.href = 'https://prolistme.com/web/web/user/register';
+  });
+
+  document.getElementById('businesscards-btn').addEventListener('click', function() {
+    window.location.href = 'https://prolistme.com/rolodexprogressbar.html';
+  });
+});
+  </script>
+  
+  <!-- State Website Map Section -->
+  <div id="map" style="height: 600px;"></div>
+
+  <script>
+    // Class definition for generating USA map
+class USAMap {
+  constructor() {
+    this.map = L.map('map').setView([37.0902, -95.7129], 4);  // Initial view settings
+    this.bounds = new L.LatLngBounds();  // Initialize the bounds
+    this.markerClusterGroup = L.markerClusterGroup();  // Initialize marker cluster group
+
+     // Add these lines in your USAMap constructor to add the info box.
+     this.infoBox = new InfoBox(this.map);
+     this.infoBox.init();
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);
+  }
+
+addMarker(location) {
+  const marker = L.marker([location.Latitude, location.Longitude]);
+  const popupContent = `<b>${location.State}</b><br><a href="${location.Website}" target="_blank">${location.Website}</a>`;
+  
+  // Bind popup content to the marker
+  marker.bindPopup(popupContent);
+
+  // Bind tooltip to the marker
+  marker.bindTooltip("Click to visit the website", {
+    // Tooltip options go here, if any
+  });
+
+  // Open the popup when mouseover event is fired
+  marker.on('mouseover', function(e) {
+    this.openPopup();
+  });
+
+  // Close the popup when mouseout event is fired
+  marker.on('mouseout', function(e) {
+    this.closePopup();
+  });
+
+  // Open the URL in a new tab when click event is fired
+  marker.on('click', function(e) {
+    window.open(location.Website, '_blank');
+  });
+
+  // Add marker to the cluster group
+  this.markerClusterGroup.addLayer(marker);
+
+  // Extend the bounds to include the new marker's position
+  this.bounds.extend(marker.getLatLng());
+}
+
+
+  // Method to fit the map to the bounds
+  fitMapToMarkers() {
+    this.map.fitBounds(this.bounds);
+  }
+
+  // Method to add marker cluster group to the map
+  addToMap() {
+    this.map.addLayer(this.markerClusterGroup);
+  }
+}
+
+// Class definition for the Information Box
+class InfoBox {
+  constructor(map) {
+    this.map = map;
+    this.infoButton = null;
+    this.isVisible = false;
+  }
+
+  // Initialize the info button
+  init() {
+    const self = this;
+    this.infoButton = L.DomUtil.create('div', 'info-button');
+    this.infoButton.innerHTML = '?';
+    this.infoButton.addEventListener('click', () => this.toggleInfoBox());
+    this.infoButton.addEventListener('mouseover', () => this.expandInfoBox());
+    this.infoButton.addEventListener('mouseout', () => this.minimizeInfoBox());
+    document.body.appendChild(this.infoButton);
+  }
+
+  toggleInfoBox() {
+    this.isVisible = !this.isVisible;
+    if (this.isVisible) {
+      this.expandInfoBox();
+    } else {
+      this.minimizeInfoBox();
+    }
+  }
+
+  expandInfoBox() {
+    this.infoButton.innerHTML = 'Your expanded info here...';
+  }
+
+  minimizeInfoBox() {
+    this.infoButton.innerHTML = '?';
+  }
+
+  // Method to update the content of the information box
+  update(content = 'Hover over a marker to see more information...') {
+    if (this.infoBox._div) {
+      this.infoBox._div.innerHTML = `<h5>State Government Office Website Locator Map Instructions:</h5>${content}`;
+      this.infoBox._div.appendChild(this.infoBox._toggleButton);
+    }
+  }
+}
+
+
+
+// Initialize the class
+const usaMap = new USAMap();
+usaMap.infoBox = new InfoBox(usaMap.map);  // Create the InfoBox object
+usaMap.infoBox.init();  // Initialize the InfoBox
+
+
+// Fetch the JSON data and add markers
+fetch('us_states_and_territories.json')
+  .then(response => response.json())
+  .then(data => {
+    const locations = data.locations;
+    locations.forEach(location => {
+      usaMap.addMarker(location);
+    });
+
+    // Add marker cluster group to the map
+    usaMap.addToMap();
+
+    // Fit the map to show all markers
+    usaMap.fitMapToMarkers();
+  })
+  .catch(error => console.error('Error fetching JSON data:', error));
+
+
+  </script>
+
+
+  
+  
+ 
+</body>
+</html>
