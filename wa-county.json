@@ -1,0 +1,314 @@
+[
+    {
+        "state_name": "Washington",
+        "county_name": "Adams County",
+        "seat_name": "Ritzville",
+        "latitude": 47.1274,
+        "longitude": -118.3790,
+        "gov_website": "https://www.co.adams.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Asotin County",
+        "seat_name": "Asotin",
+        "latitude": 46.3386,
+        "longitude": -117.0464,
+        "gov_website": "https://www.co.asotin.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Benton County",
+        "seat_name": "Prosser",
+        "latitude": 46.2068,
+        "longitude": -119.7658,
+        "gov_website": "https://www.co.benton.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Chelan County",
+        "seat_name": "Wenatchee",
+        "latitude": 47.4235,
+        "longitude": -120.3103,
+        "gov_website": "https://www.co.chelan.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Clallam County",
+        "seat_name": "Port Angeles",
+        "latitude": 48.1181,
+        "longitude": -123.4307,
+        "gov_website": "https://www.clallam.net/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Clark County",
+        "seat_name": "Vancouver",
+        "latitude": 45.6257,
+        "longitude": -122.6761,
+        "gov_website": "https://www.clark.wa.gov/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Columbia County",
+        "seat_name": "Dayton",
+        "latitude": 46.3215,
+        "longitude": -117.9774,
+        "gov_website": "https://www.columbiaco.com/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Cowlitz County",
+        "seat_name": "Kelso",
+        "latitude": 46.1468,
+        "longitude": -122.9084,
+        "gov_website": "https://www.co.cowlitz.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Douglas County",
+        "seat_name": "Waterville",
+        "latitude": 47.6506,
+        "longitude": -120.0724,
+        "gov_website": "https://www.douglascountywa.net/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Ferry County",
+        "seat_name": "Republic",
+        "latitude": 48.6499,
+        "longitude": -118.7375,
+        "gov_website": "https://www.ferry-county.com/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Franklin County",
+        "seat_name": "Pasco",
+        "latitude": 46.2396,
+        "longitude": -119.1006,
+        "gov_website": "https://www.co.franklin.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Garfield County",
+        "seat_name": "Pomeroy",
+        "latitude": 46.4743,
+        "longitude": -117.6024,
+        "gov_website": "https://www.co.garfield.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Grant County",
+        "seat_name": "Ephrata",
+        "latitude": 47.3176,
+        "longitude": -119.5536,
+        "gov_website": "https://www.grantcountywa.gov/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Grays Harbor County",
+        "seat_name": "Montesano",
+        "latitude": 46.9810,
+        "longitude": -123.6024,
+        "gov_website": "https://www.co.grays-harbor.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Island County",
+        "seat_name": "Coupeville",
+        "latitude": 48.2205,
+        "longitude": -122.6866,
+        "gov_website": "https://www.islandcountywa.gov/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Jefferson County",
+        "seat_name": "Port Townsend",
+        "latitude": 48.1170,
+        "longitude": -122.7604,
+        "gov_website": "https://www.co.jefferson.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "King County",
+        "seat_name": "Seattle",
+        "latitude": 47.6062,
+        "longitude": -122.3321,
+        "gov_website": "https://www.kingcounty.gov/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Kitsap County",
+        "seat_name": "Port Orchard",
+        "latitude": 47.5404,
+        "longitude": -122.6363,
+        "gov_website": "https://www.kitsapgov.com/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Kittitas County",
+        "seat_name": "Ellensburg",
+        "latitude": 47.0007,
+        "longitude": -120.5478,
+        "gov_website": "https://www.co.kittitas.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Klickitat County",
+        "seat_name": "Goldendale",
+        "latitude": 45.8207,
+        "longitude": -120.8217,
+        "gov_website": "https://www.klickitatcounty.org/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Lewis County",
+        "seat_name": "Chehalis",
+        "latitude": 46.6631,
+        "longitude": -122.9640,
+        "gov_website": "https://lewiscountywa.gov/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Lincoln County",
+        "seat_name": "Davenport",
+        "latitude": 47.6579,
+        "longitude": -118.1593,
+        "gov_website": "https://www.co.lincoln.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Mason County",
+        "seat_name": "Shelton",
+        "latitude": 47.2151,
+        "longitude": -123.1007,
+        "gov_website": "https://www.co.mason.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Okanogan County",
+        "seat_name": "Okanogan",
+        "latitude": 48.3794,
+        "longitude": -119.5885,
+        "gov_website": "https://okanogancounty.org/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Pacific County",
+        "seat_name": "South Bend",
+        "latitude": 46.6620,
+        "longitude": -123.7840,
+        "gov_website": "https://www.co.pacific.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Pend Oreille County",
+        "seat_name": "Newport",
+        "latitude": 48.1799,
+        "longitude": -117.0460,
+        "gov_website": "https://www.pendoreilleco.org/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Pierce County",
+        "seat_name": "Tacoma",
+        "latitude": 47.2529,
+        "longitude": -122.4443,
+        "gov_website": "https://www.co.pierce.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "San Juan County",
+        "seat_name": "Friday Harbor",
+        "latitude": 48.5343,
+        "longitude": -123.0167,
+        "gov_website": "https://www.sanjuanco.com/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Skagit County",
+        "seat_name": "Mount Vernon",
+        "latitude": 48.4212,
+        "longitude": -122.3340,
+        "gov_website": "https://www.skagitcounty.net/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Skamania County",
+        "seat_name": "Stevenson",
+        "latitude": 45.6944,
+        "longitude": -121.8875,
+        "gov_website": "https://www.skamaniacounty.org/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Snohomish County",
+        "seat_name": "Everett",
+        "latitude": 47.9780,
+        "longitude": -122.2021,
+        "gov_website": "https://snohomishcountywa.gov/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Spokane County",
+        "seat_name": "Spokane",
+        "latitude": 47.6588,
+        "longitude": -117.4260,
+        "gov_website": "https://www.spokanecounty.org/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Stevens County",
+        "seat_name": "Colville",
+        "latitude": 48.5479,
+        "longitude": -117.9040,
+        "gov_website": "https://www.stevenscountywa.gov/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Thurston County",
+        "seat_name": "Olympia",
+        "latitude": 47.0379,
+        "longitude": -122.9007,
+        "gov_website": "https://www.thurstoncountywa.gov/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Wahkiakum County",
+        "seat_name": "Cathlamet",
+        "latitude": 46.2944,
+        "longitude": -123.4247,
+        "gov_website": "https://www.co.wahkiakum.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Walla Walla County",
+        "seat_name": "Walla Walla",
+        "latitude": 46.0646,
+        "longitude": -118.3430,
+        "gov_website": "https://www.co.walla-walla.wa.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Whatcom County",
+        "seat_name": "Bellingham",
+        "latitude": 48.7544,
+        "longitude": -122.4788,
+        "gov_website": "https://www.whatcomcounty.us/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Whitman County",
+        "seat_name": "Colfax",
+        "latitude": 46.8852,
+        "longitude": -117.3624,
+        "gov_website": "https://www.whitmancounty.org/"
+    },
+    {
+        "state_name": "Washington",
+        "county_name": "Yakima County",
+        "seat_name": "Yakima",
+        "latitude": 46.6021,
+        "longitude": -120.5059,
+        "gov_website": "https://www.yakimacounty.us/"
+    }
+]
